@@ -1,6 +1,33 @@
-/* Container base for page padding and max width */
+/* --- Fonts & Reset --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;900&display=swap');
+
+:root {
+  --primary-color: #fdbc3d; /* Amber Accent */
+  --secondary-color: #f59e0b; /* Darker Amber */
+  --text-dark: #1e293b; /* Slate Dark */
+  --text-gray: #475569; /* Slate Gray */
+  --bg-light: #fefcf3; /* Very light cream */
+  --bg-decor: #fde68a; /* Pale Yellow for accents */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Container base for page padding and max width (Global Utility) */
 .container {
-  max-width: 1140px;
+  max-width: 1200px; 
   margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
@@ -149,4 +176,5 @@
     flex-direction: column;
     gap: 48px;
   }
+  
 }
