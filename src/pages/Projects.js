@@ -1,61 +1,40 @@
 import React, { useState } from "react";
 import "./Projects.css";
 
-
 const allProjects = [
   {
     id: 1,
-    title: "Connected Health Monitor",
-    category: "IoT",
-    tech: ["Embedded C", "NodeJS", "Firebase"],
-    description: "A real-time system monitoring patient vitals using edge computing and uploading data to a secure cloud database.",
-    year: 2024,
-    link: "#",
+    title: "Medicine Reminder System",
+    category: "IoT/Embedded",
+    tech: ["STM32", "IoT-based logging", "ML-based pILL verification"],
+    description: "Developed a secure and elderly-patient integrated system for medication logging with an IoT platform. Designed robust control logic, implemented cloud-hardware communication, and developed ML model for pill intake verification.",
+    year: "Major Project",
   },
   {
     id: 2,
-    title: "AI-Powered Image Classifier",
-    category: "AIML",
-    tech: ["Python", "Machine Learning", "Data Visualization"],
-    description: "Built a convolutional neural network (CNN) model to categorize custom datasets with 95% accuracy. Deployed via a REST API.",
-    year: 2023,
-    link: "#",
+    title: "HelloPills (Real-Time Healthcare)",
+    category: "Web/IoT",
+    tech: ["React Hooks", "Firebase", "RBAC", "Optimized Database"],
+    description: "Engineered a real-time healthcare platform using React Hooks and Firebase. Features sync between doctor and caregiver dashboards, role-based access control (RBAC), optimized database structures, and developed dashboards for patient monitoring and alerts.",
+    year: "Self-Project",
   },
   {
     id: 3,
-    title: "Full-Stack E-commerce Site",
-    category: "Web Development",
-    tech: ["ReactJS", "NodeJS", "MongoDB"],
-    description: "Developed a responsive e-commerce platform featuring secure payments, user authentication, and product search.",
-    year: 2024,
-    link: "#",
+    title: "AI Diagnostic Assistant",
+    category: "AIML",
+    tech: ["FastAPI", "Scikit-learn", "API Endpoints"],
+    description: "Developed a disease prediction API using FastAPI and Scikit-learn. Capable of predicting conditions from multi-symptom inputs. Implemented probabilistic confidence scoring, trained ML models, and deployed customized API endpoints.",
+    year: "Self-Project",
+    link: "https://github.com/iamarshiya/AI-Diagnostic-Assistant",
   },
   {
     id: 4,
-    title: "Smart Home Controller (C)",
-    category: "Embedded C",
-    tech: ["Embedded C", "Hardware Integration", "IoT"],
-    description: "Low-level system programming for a smart light control unit, focusing on memory efficiency and responsiveness.",
-    year: 2023,
-    link: "#",
-  },
-  {
-    id: 5,
-    title: "Data Visualization Dashboard",
-    category: "Data Visualization",
-    tech: ["ReactJS", "Python", "Data Visualization"],
-    description: "Interactive dashboard visualizing large datasets derived from IoT sensor readings, built with React and D3.js.",
-    year: 2024,
-    link: "#",
-  },
-  {
-    id: 6,
-    title: "Task Management API",
-    category: "Web Development",
-    tech: ["NodeJS", "REST API", "MongoDB"],
-    description: "Developed a robust backend API for managing tasks, users, and permissions, adhering to RESTful standards.",
-    year: 2022,
-    link: "#",
+    title: "Defect Detection in Zari Manufacturing",
+    category: "Computer Vision",
+    tech: ["OpenCV", "Random Forest", "Image Processing"],
+    description: "Built a computer vision pipeline using OpenCV and Random Forest to detect silver thread irregularities. Implemented preprocessing pipeline, optimized contour extraction, trained ML classifier, and validated the model's accuracy.",
+    year: "College Project",
+    link: "https://github.com/iamarshiya/Loom_Defetct_Detection",
   },
 ];
 
@@ -118,9 +97,12 @@ export default function Projects() {
                   ))}
                 </div>
 
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-view-project">
-                  View Project <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
+                {/* CONDITIONAL RENDERING: Only render the link if project.link exists */}
+                {project.link && (
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-view-project">
+                      View Project <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>
+                )}
               </div>
             ))
           ) : (
