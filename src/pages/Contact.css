@@ -1,0 +1,242 @@
+/* --- Fonts & Root Variables (Unified Theme) --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;900&display=swap');
+
+:root {
+  --primary-color: #fdbc3d; /* Amber Accent */
+  --secondary-color: #e59300; /* Darker, richer Amber */
+  --text-dark: #121926; /* Very dark slate for max contrast */
+  --text-gray: #334155; /* Slightly darker gray for description text */
+  --bg-light: #fefcf3; /* Very light cream (Main Background) */
+  --bg-section-alt: #fff; /* Pure White */
+  --bg-decor-color: #fde68a; /* Pale Yellow for accents */
+  
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Glassmorphism colors */
+  --glass-bg-start: rgba(255, 255, 255, 0.25);
+  --glass-bg-end: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: rgba(0, 0, 0, 0.15);
+}
+
+/* Global Styles */
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+}
+
+/* --- Background Decorations --- */
+.bg-decor {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  opacity: 0.7;
+  background: var(--bg-decor-color);
+}
+
+.bg-decor-1 {
+  width: 600px;
+  height: 600px;
+  top: -100px;
+  left: -200px;
+}
+
+.bg-decor-2 {
+  width: 400px;
+  height: 400px;
+  bottom: -50px;
+  right: -150px;
+}
+
+/* ------------------------------------------------------------------- */
+/* --- CONTACT SECTION LAYOUT --- */
+/* ------------------------------------------------------------------- */
+.contact-section {
+  background-color: var(--bg-light); 
+  padding: 80px 0 100px; 
+  position: relative; 
+  overflow: hidden; 
+}
+
+.contact-content-wrapper {
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 0 60px; 
+  position: relative; 
+  z-index: 10;
+}
+
+.contact-title {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 3rem; 
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.highlight {
+  color: var(--secondary-color);
+}
+
+.contact-description {
+  font-weight: 400;
+  font-size: 1.15rem; 
+  max-width: 700px;
+  margin: 0 auto 3rem; 
+  line-height: 1.7; 
+  color: var(--text-gray);
+  text-align: center;
+}
+
+.contact-layout {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------------------------------------- */
+/* --- CARD STYLES (Glassmorphism Applied) --- */
+/* ------------------------------------------------------------------- */
+.info-card, .form-card {
+    flex: 1 1 450px;
+    max-width: 550px;
+    
+    /* Applying Glassmorphism */
+    background: linear-gradient(135deg, var(--glass-bg-start), var(--glass-bg-end));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 var(--glass-shadow);
+    
+    padding: 3rem;
+    border-radius: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.info-card h3, .form-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Info Card Specifics --- */
+.info-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-card > p {
+    color: var(--text-gray);
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    margin-bottom: 1.5rem;
+}
+
+.info-item h4 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin: 0 0 0.25rem 0;
+}
+
+.info-item p {
+    font-size: 1rem;
+    color: var(--text-dark);
+    font-weight: 500;
+    margin: 0;
+}
+
+
+/* --- Form Card Specifics --- */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.7); /* Slightly opaque white background in the glass card */
+    color: var(--text-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(253, 188, 61, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.btn-submit {
+    background-color: var(--text-dark); 
+    color: var(--bg-section-alt);
+    border: none;
+    border-radius: 50px; 
+    padding: 12px 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ------------------------------------------------------------------- */
+/* --- Responsive Adjustments --- */
+/* ------------------------------------------------------------------- */
+@media (max-width: 960px) {
+    .contact-layout {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .info-card, .form-card {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+    }
+    
+    .contact-content-wrapper {
+        padding: 0 20px;
+    }
+
+    .bg-decor {
+      display: none;
+    }
+}

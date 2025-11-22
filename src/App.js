@@ -1,15 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import Home from "./pages/Home.js";
+import Home from "./pages/Home";
 import About from "./pages/About.js";
 import Projects from "./pages/Projects.js";
+//import Portfolio from "./pages/Portfolio.js";
+import Contact from "./pages/Contact.js";
 import "./App.css";
 
 
 // 2. Keep  the placeholder pages here
-//const Projects = () => <div className="page-content"><h1>Projects</h1><p>My projects will go here.</p></div>;
-const Portfolio = () => <div className="page-content"><h1>Portfolio</h1><p>My portfolio will go here.</p></div>;
-const Contact = () => <div className="page-content"><h1>Contact</h1><p>My contact info will go here.</p></div>;
+//const Portfolio = () => <div className="page-content"><h1>Portfolio</h1><p>My portfolio will go here.</p></div>;
+//const Blog = () => <div className="page-content"><h1>Blog</h1><p>My blog will go here.</p></div>;
+//const Contact = () => <div className="page-content"><h1>Contact</h1><p>My contact info will go here.</p></div>;
 
 
 // New: Navbar component keeps <li> button effect and navigates programmatically
@@ -20,7 +22,8 @@ function Navbar() {
     { label: "Home", path: "/" },
     { label: "About Me", path: "/about" },
     { label: "Projects", path: "/projects" },
-    { label: "Portfolio", path: "/portfolio" },
+  //  { label: "Portfolio", path: "/Portfolio" },
+   // { label: "Blog", path: "/blog" },
     { label: "Contact", path: "/contact" },
   ];
 
@@ -63,7 +66,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/portfolio" element={<Portfolio />} />
+      {/* <Route path="/portfolio" element={<Portfolio />} /> */}
+       {/* <Route path="/blog" element={<Blog />} /> */}
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>

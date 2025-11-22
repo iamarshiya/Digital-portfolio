@@ -1,120 +1,133 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Projects.css";
 
-const projects = [
+
+const allProjects = [
   {
     id: 1,
-    title: "How to chat?",
-    description:
-      "An educational and entertaining website that teaches users how to chat politely, effectively, and confidently online.",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="48"
-        height="48"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="#fdbc3d"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M8 14s1.5 2 4 2 4-2 4-2m-8-2v-4a4 4 0 018 0v4"></path>
-        <circle cx="12" cy="7" r="2"></circle>
-      </svg>
-    ),
+    title: "Connected Health Monitor",
+    category: "IoT",
+    tech: ["Embedded C", "NodeJS", "Firebase"],
+    description: "A real-time system monitoring patient vitals using edge computing and uploading data to a secure cloud database.",
+    year: 2024,
+    link: "#",
   },
   {
     id: 2,
-    title: "Scraper 1",
-    description:
-      "An innovative solution for data collection and web scraping, tailored for startups and data analysis projects.",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="48"
-        height="48"
-        fill="#fdbc3d"
-        viewBox="0 0 24 24"
-      >
-        <path d="M12 2C9.243 2 7 4.243 7 7c0 7-4 9-4 9h18s-4-2-4-9c0-2.757-2.243-5-5-5zM12 10a3 3 0 100-6 3 3 0 000 6z" />
-        <text x="12" y="18" fontSize="8" fontWeight="bold" fill="#fdbc3d" textAnchor="middle">
-          1
-        </text>
-      </svg>
-    ),
+    title: "AI-Powered Image Classifier",
+    category: "AIML",
+    tech: ["Python", "Machine Learning", "Data Visualization"],
+    description: "Built a convolutional neural network (CNN) model to categorize custom datasets with 95% accuracy. Deployed via a REST API.",
+    year: 2023,
+    link: "#",
   },
   {
     id: 3,
-    title: "Persian Ad Block",
-    description:
-      "A browser add-on designed to eliminate annoying ads on Persian websites.",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="48"
-        height="48"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="#fdbc3d"
-        strokeWidth="1.5"
-      >
-        <circle cx="12" cy="12" r="10" stroke="#fdbc3d" />
-        <path
-          d="M9 9l6 6M9 15l6-6"
-          stroke="#fdbc3d"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
+    title: "Full-Stack E-commerce Site",
+    category: "Web Development",
+    tech: ["ReactJS", "NodeJS", "MongoDB"],
+    description: "Developed a responsive e-commerce platform featuring secure payments, user authentication, and product search.",
+    year: 2024,
+    link: "#",
   },
   {
     id: 4,
-    title: "Design & Branding",
-    description:
-      "Experiencing both frontend and branding design, I’ve created logos, websites, and social media content for businesses and projects.",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="48"
-        height="48"
-        fill="#fdbc3d"
-        viewBox="0 0 24 24"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <path
-          fill="#fff"
-          d="M16 9a4 4 0 11-8 0 4 4 0 018 0z"
-        />
-      </svg>
-    ),
+    title: "Smart Home Controller (C)",
+    category: "Embedded C",
+    tech: ["Embedded C", "Hardware Integration", "IoT"],
+    description: "Low-level system programming for a smart light control unit, focusing on memory efficiency and responsiveness.",
+    year: 2023,
+    link: "#",
+  },
+  {
+    id: 5,
+    title: "Data Visualization Dashboard",
+    category: "Data Visualization",
+    tech: ["ReactJS", "Python", "Data Visualization"],
+    description: "Interactive dashboard visualizing large datasets derived from IoT sensor readings, built with React and D3.js.",
+    year: 2024,
+    link: "#",
+  },
+  {
+    id: 6,
+    title: "Task Management API",
+    category: "Web Development",
+    tech: ["NodeJS", "REST API", "MongoDB"],
+    description: "Developed a robust backend API for managing tasks, users, and permissions, adhering to RESTful standards.",
+    year: 2022,
+    link: "#",
   },
 ];
 
+const categories = ["All", ...new Set(allProjects.map((p) => p.category))];
+
+// ------------------------------------------
+
 export default function Projects() {
+  const [filter, setFilter] = useState("All");
+  
+  const filteredProjects = allProjects.filter((project) => 
+    filter === "All" ? true : project.category === filter
+  );
+
   return (
-    <>
-      <section className="projects-section">
+    <section className="projects-section">
+      {/* Background Decorations */}
+      <div className="bg-decor bg-decor-1"></div>
+      <div className="bg-decor bg-decor-2"></div>
+      
+      <div className="projects-content-wrapper">
         <h2 className="projects-title">
-          What have I created?<span className="highlight">.</span>
+          My <span className="highlight">Projects</span>.
         </h2>
 
         <p className="projects-description">
-          Creating isn’t just part of my work , it’s part of my life. I’ve always tried to keep that spark of building alive and never lose the joy of bringing ideas to life. Here you can explore the projects I’ve built and released with my own vision and passion.
+          A focused showcase of systems I've built, emphasizing my skills in full-stack web development, embedded systems, and machine learning applications.
         </p>
 
-        <div className="projects-grid">
-          {projects.map((project) => (
-            <div className="project-card" key={project.id}>
-              <div className="project-icon">{project.icon}</div>
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-description">{project.description}</p>
-              <button className="btn-readmore">Read More</button>
-            </div>
+        {/* --- Category Filters --- */}
+        <div className="filter-buttons">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`btn-filter ${filter === cat ? "active" : ""}`}
+              onClick={() => setFilter(cat)}
+            >
+              {cat}
+            </button>
           ))}
         </div>
-      </section>
-    </>
+
+        {/* --- Projects Grid --- */}
+        <div className="projects-grid">
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((project) => (
+              <div className="project-card" key={project.id}>
+                <div className="card-header">
+                  <span className="project-category">{project.category}</span>
+                  <span className="project-year">{project.year}</span>
+                </div>
+
+                <h3 className="project-title">{project.title}</h3>
+                
+                <p className="project-description">{project.description}</p>
+                
+                <div className="tech-tags">
+                  {project.tech.map((tag) => (
+                    <span key={tag} className="tech-tag">{tag}</span>
+                  ))}
+                </div>
+
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-view-project">
+                  View Project <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            ))
+          ) : (
+            <p className="no-projects">No projects found in this category.</p>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
