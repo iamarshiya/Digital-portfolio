@@ -1,69 +1,36 @@
-/* --- Fonts & Root Variables (Unified Theme) --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;900&display=swap');
-
+/* --- CSS Variables from App.js for consistency --- */
 :root {
-  --primary-color: #fdbc3d; /* Amber Accent */
-  --secondary-color: #e59300; /* Darker, richer Amber */
-  --text-dark: #121926; /* Very dark slate for max contrast */
-  --text-gray: #334155; /* Slightly darker gray for description text */
-  --bg-light: #fefcf3; /* Very light cream (Main Background) */
-  --bg-section-alt: #fff; /* Pure White */
-  --bg-decor-color: #fde68a; /* Pale Yellow for accents */
-  
+  --primary-color: #D2FDBB; /* Mint Green Accent */
+  --secondary-color: #B2E59E; /* Darker Mint */
+  --text-light: #f5f5f5; /* Off-White */
+  --text-muted: #a3aed0; /* Muted Gray */
+  --bg-dark: #0A0D11; /* Deep Dark Background */
+  --card-bg: #11151a; /* Dark Card Background */
+  --nav-card-bg: #1c2128; /* Slightly lighter card for contrast */
+  --border-color: #2d333b; /* Subtle border/line color */
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
 
-  /* Glassmorphism colors */
-  --glass-bg-start: rgba(255, 255, 255, 0.25);
-  --glass-bg-end: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-shadow: rgba(0, 0, 0, 0.15);
-}
-
-/* Global Styles */
-body {
-    font-family: var(--font-body);
-    color: var(--text-dark);
-}
-
-/* --- Background Decorations --- */
-.bg-decor {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  z-index: 0;
-  opacity: 0.7;
-  background: var(--bg-decor-color);
-}
-
-.bg-decor-1 {
-  width: 600px;
-  height: 600px;
-  top: -100px;
-  left: -200px;
-}
-
-.bg-decor-2 {
-  width: 400px;
-  height: 400px;
-  bottom: -50px;
-  right: -150px;
+  /* Techy Glassmorphism colors (DARK MODE) */
+  --glass-bg-start: rgba(17, 21, 26, 0.7); /* Card BG 70% opacity */
+  --glass-bg-end: rgba(17, 21, 26, 0.9);   /* Card BG 90% opacity */
+  --glass-border: rgba(45, 51, 59, 0.4);   /* Border Color 40% opacity */
 }
 
 /* ------------------------------------------------------------------- */
 /* --- CONTACT SECTION LAYOUT --- */
 /* ------------------------------------------------------------------- */
 .contact-section {
-  background-color: var(--bg-light); 
-  padding: 80px 0 100px; 
+  /* Use the main section padding defined in App.js for spacing */
+  width: 100%;
+  padding: 4rem 2rem;
   position: relative; 
   overflow: hidden; 
 }
 
 .contact-content-wrapper {
-  max-width: 1200px; 
+  max-width: 1100px; 
   margin: 0 auto; 
-  padding: 0 60px; 
   position: relative; 
   z-index: 10;
 }
@@ -72,13 +39,28 @@ body {
   font-family: var(--font-heading);
   font-weight: 900;
   font-size: 3rem; 
-  color: var(--text-dark);
+  color: var(--text-light);
   margin-bottom: 0.5rem;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .highlight {
-  color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+/* Reduced Neon Glow */
+.neon-glow {
+    text-shadow: 
+        0 0 1px var(--primary-color), 
+        0 0 2px var(--primary-color); 
+}
+
+.contact-title .title-icon {
+    color: var(--primary-color);
+    margin-left: 10px;
 }
 
 .contact-description {
@@ -87,7 +69,7 @@ body {
   max-width: 700px;
   margin: 0 auto 3rem; 
   line-height: 1.7; 
-  color: var(--text-gray);
+  color: var(--text-muted);
   text-align: center;
 }
 
@@ -99,29 +81,35 @@ body {
 }
 
 /* ------------------------------------------------------------------- */
-/* --- CARD STYLES (Glassmorphism Applied) --- */
+/* --- CARD STYLES (Techy Dark Glassmorphism) --- */
 /* ------------------------------------------------------------------- */
 .info-card, .form-card {
     flex: 1 1 450px;
     max-width: 550px;
     
-    /* Applying Glassmorphism */
+    /* Applying Dark Glassmorphism */
     background: linear-gradient(135deg, var(--glass-bg-start), var(--glass-bg-end));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0 var(--glass-shadow);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4); /* Darker shadow for depth */
     
-    padding: 3rem;
+    padding: 2.5rem;
     border-radius: 16px;
     position: relative;
     z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover, .form-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(210, 253, 187, 0.4);
 }
 
 .info-card h3, .form-card h3 {
     font-family: var(--font-heading);
     font-size: 1.8rem;
-    color: var(--text-dark);
+    color: var(--primary-color);
     margin-top: 0;
     margin-bottom: 1.5rem;
 }
@@ -130,11 +118,11 @@ body {
 .info-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .info-card > p {
-    color: var(--text-gray);
+    color: var(--text-muted);
     margin-bottom: 2rem;
 }
 
@@ -143,17 +131,26 @@ body {
 }
 
 .info-item h4 {
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: 1.1rem;
-    color: var(--secondary-color);
+    color: var(--text-light);
     margin: 0 0 0.25rem 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-item .icon {
+    color: var(--primary-color);
 }
 
 .info-item p {
     font-size: 1rem;
-    color: var(--text-dark);
+    color: var(--text-muted);
     font-weight: 500;
     margin: 0;
+    margin-left: 26px; /* Align text under icon */
 }
 
 
@@ -165,23 +162,23 @@ body {
 .form-group label {
     display: block;
     font-weight: 600;
-    color: var(--text-dark);
+    color: var(--text-light);
     margin-bottom: 0.5rem;
     font-size: 0.95rem;
 }
 
 .form-group input[type="text"],
 .form-group input[type="email"],
-.form-group input[type="text"],
 .form-group textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     font-family: var(--font-body);
     font-size: 1rem;
-    background-color: rgba(255, 255, 255, 0.7); /* Slightly opaque white background in the glass card */
-    color: var(--text-dark);
+    /* Input background is slightly lighter than card but dark */
+    background-color: var(--nav-card-bg); 
+    color: var(--text-light);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -189,7 +186,7 @@ body {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(253, 188, 61, 0.3);
+    box-shadow: 0 0 0 3px rgba(210, 253, 187, 0.3);
 }
 
 .form-group textarea {
@@ -197,28 +194,55 @@ body {
 }
 
 .btn-submit {
-    background-color: var(--text-dark); 
-    color: var(--bg-section-alt);
-    border: none;
-    border-radius: 50px; 
-    padding: 12px 30px;
-    font-weight: 600;
+    padding: 12px 28px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    white-space: nowrap;
+    box-shadow: 0 6px 10px rgba(210, 253, 187, 0.4);
+
+    background-color: var(--primary-color); 
+    color: var(--card-bg); /* Dark text on mint */
     margin-top: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .btn-submit:hover {
-    background-color: #000;
+    background-color: var(--secondary-color);
     transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 15px rgba(210, 253, 187, 0.6); 
 }
 
+.btn-submit:active {
+    transform: translateY(1px); 
+    box-shadow: 0 3px 6px rgba(210, 253, 187, 0.3); 
+}
+
+.contact-link {
+    color: var(--primary-color); /* Mint green color */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.contact-link:hover {
+    color: var(--secondary-color); /* Slightly darker mint on hover */
+    text-decoration: underline;
+}
 /* ------------------------------------------------------------------- */
 /* --- Responsive Adjustments --- */
 /* ------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+    .contact-layout {
+        gap: 2rem;
+    }
+}
+
 @media (max-width: 960px) {
     .contact-layout {
         flex-direction: column;
@@ -227,7 +251,7 @@ body {
     }
     
     .info-card, .form-card {
-        max-width: 100%;
+        max-width: 90%;
         width: 100%;
         padding: 2rem;
     }
@@ -235,8 +259,22 @@ body {
     .contact-content-wrapper {
         padding: 0 20px;
     }
+    .info-item p {
+        margin-left: 20px;
+    }
+}
 
-    .bg-decor {
-      display: none;
+@media (max-width: 500px) {
+    .contact-title {
+        font-size: 2rem;
+    }
+    .info-item h4 {
+        font-size: 1rem;
+    }
+    .info-card h3, .form-card h3 {
+        font-size: 1.5rem;
+    }
+    .info-item p {
+        font-size: 0.95rem;
     }
 }

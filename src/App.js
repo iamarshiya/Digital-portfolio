@@ -1,76 +1,97 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About.js";
-import Projects from "./pages/Projects.js";
-//import Portfolio from "./pages/Portfolio.js";
-import Contact from "./pages/Contact.js";
-import "./App.css";
+import React, { useState, useEffect, useCallback } from "react";
+import { Home as HomeIcon, User, FolderGit, Mail } from 'lucide-react';
 
+// --- Import Global Styles ---
+import './App.css';
 
-// 2. Keep  the placeholder pages here
-//const Portfolio = () => <div className="page-content"><h1>Portfolio</h1><p>My portfolio will go here.</p></div>;
-//const Blog = () => <div className="page-content"><h1>Blog</h1><p>My blog will go here.</p></div>;
-//const Contact = () => <div className="page-content"><h1>Contact</h1><p>My contact info will go here.</p></div>;
+// --- IMPORT SEPARATED PAGE COMPONENTS ---
+import Home from "./pages/Home"; 
+import About from "./pages/About"; 
+import Projects from "./pages/Projects"; 
+import Contact from "./pages/Contact"; 
+// ------------------------------------
 
+// IMPORT THE NEW WELCOME OVERLAY COMPONENT
+import WelcomeOverlay from "./WelcomeOverlay"; // <-- NEW IMPORT
 
-// New: Navbar component keeps <li> button effect and navigates programmatically
-function Navbar() {
-  const navigate = useNavigate();
-  const location = useLocation();
+// --- 2. Navbar Component (State-based Navigation) ---
+const Navbar = ({ currentPage, setCurrentPage }) => {
   const navItems = [
-    { label: "Home", path: "/" },
-    { label: "About Me", path: "/about" },
-    { label: "Projects", path: "/projects" },
-  //  { label: "Portfolio", path: "/Portfolio" },
-   // { label: "Blog", path: "/blog" },
-    { label: "Contact", path: "/contact" },
+    { label: "Home", page: "home", Icon: HomeIcon },
+    { label: "About", page: "about", Icon: User },
+    { label: "Projects", page: "projects", Icon: FolderGit },
+    { label: "Contact", page: "contact", Icon: Mail },
   ];
 
-  const handleKeyDown = (e, path) => {
+  const handleKeyDown = (e, page) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      navigate(path);
+      setCurrentPage(page);
     }
   };
 
   return (
-    <nav className="navbar">
-      <div className="logo">
-        Arshiya<span className="dot">.</span>
+    <div className="navbar-container-fixed">
+      <div className="navbar-content-wrapper">
+          <div className="logo">
+            Arshiya<span className="dot">.</span>
+          </div>
+          <nav className="navbar border-glow frosted-nav">
+            <ul className="nav-links">
+              {navItems.map(item => (
+                <li
+                  key={item.page}
+                  className={item.page === currentPage ? "active" : ""}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => setCurrentPage(item.page)}
+                  onKeyDown={(e) => handleKeyDown(e, item.page)}
+                >
+                  <item.Icon size={16} className="inline-block mr-1" />
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </nav>
       </div>
-      <ul className="nav-links">
-        {navItems.map(item => (
-          <li
-            key={item.path}
-            className={location.pathname === item.path ? "active" : ""}
-            role="button"
-            tabIndex={0}
-            onClick={() => navigate(item.path)}
-            onKeyDown={(e) => handleKeyDown(e, item.path)}
-          >
-            {item.label}
-          </li>
-        ))}
-      </ul>
-    </nav>
+    </div>
   );
 }
 
-function App() {
+
+// --- 3. Main App Component ---
+export default function App() {
+  const [currentPage, setCurrentPage] = useState("home");
+  const [showWelcome, setShowWelcome] = useState(true); 
+
+  const handleWelcomeEnd = useCallback(() => {
+    setShowWelcome(false);
+  }, []);
+
+  const renderPage = useCallback(() => {
+    switch (currentPage) {
+     case "about":
+        return <About setCurrentPage={setCurrentPage} />;
+      case "projects":
+        return <Projects />; 
+      case "contact":
+        return <Contact />; 
+      case "home":
+      default:
+        return <Home setCurrentPage={setCurrentPage} />; 
+    }
+  }, [currentPage]);
+
   return (
-    // 4. Wrap everything in <Router>
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-      {/* <Route path="/portfolio" element={<Portfolio />} /> */}
-       {/* <Route path="/blog" element={<Blog />} /> */}
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </Router>
+    <>
+      {showWelcome && <WelcomeOverlay onAnimationEnd={handleWelcomeEnd} />}
+      
+      <div className="main-app-container" style={{ visibility: showWelcome ? 'hidden' : 'visible' }}>
+          <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          <div className="page-transition">
+            {renderPage()}
+          </div>
+      </div>
+    </>
   );
 }
-export default App;

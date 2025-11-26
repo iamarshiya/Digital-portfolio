@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./Projects.css";
+import { Zap, ExternalLink } from 'lucide-react';
 
 const allProjects = [
   {
     id: 1,
     title: "Medicine Reminder System",
     category: "IoT/Embedded",
-    tech: ["STM32", "IoT-based logging", "ML-based pILL verification"],
+    tech: ["STM32", "IoT-based logging", "ML-based pill verification"],
     description: "Developed a secure and elderly-patient integrated system for medication logging with an IoT platform. Designed robust control logic, implemented cloud-hardware communication, and developed ML model for pill intake verification.",
     year: "Major Project",
   },
@@ -50,66 +51,65 @@ export default function Projects() {
   );
 
   return (
-    <section className="projects-section">
-      {/* Background Decorations */}
-      <div className="bg-decor bg-decor-1"></div>
-      <div className="bg-decor bg-decor-2"></div>
-      
-      <div className="projects-content-wrapper">
-        <h2 className="projects-title">
-          My <span className="highlight">Projects</span>.
-        </h2>
+    <main className="main-section">
+        <section className="projects-section">
+            
+            <div className="projects-content-wrapper">
+                <h2 className="projects-title neon-glow">
+                    My <span className="highlight">Projects</span> <Zap size={36} className="title-icon"/>
+                </h2>
 
-        <p className="projects-description">
-          A focused showcase of systems I've built, emphasizing my skills in full-stack web development, embedded systems, and machine learning applications.
-        </p>
+                <p className="projects-description">
+                    A focused showcase of systems I've built, emphasizing my skills in full-stack web development, embedded systems, and machine learning applications.
+                </p>
 
-        {/* --- Category Filters --- */}
-        <div className="filter-buttons">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`btn-filter ${filter === cat ? "active" : ""}`}
-              onClick={() => setFilter(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* --- Projects Grid --- */}
-        <div className="projects-grid">
-          {filteredProjects.length > 0 ? (
-            filteredProjects.map((project) => (
-              <div className="project-card" key={project.id}>
-                <div className="card-header">
-                  <span className="project-category">{project.category}</span>
-                  <span className="project-year">{project.year}</span>
+                {/* --- Category Filters --- */}
+                <div className="filter-buttons">
+                    {categories.map((cat) => (
+                        <button
+                        key={cat}
+                        className={`btn-filter ${filter === cat ? "active" : ""}`}
+                        onClick={() => setFilter(cat)}
+                        >
+                        {cat}
+                        </button>
+                    ))}
                 </div>
 
-                <h3 className="project-title">{project.title}</h3>
-                
-                <p className="project-description">{project.description}</p>
-                
-                <div className="tech-tags">
-                  {project.tech.map((tag) => (
-                    <span key={tag} className="tech-tag">{tag}</span>
-                  ))}
-                </div>
+                {/* --- Projects Grid --- */}
+                <div className="projects-grid">
+                    {filteredProjects.length > 0 ? (
+                        filteredProjects.map((project) => (
+                            <div className="project-card glow-on-hover" key={project.id}>
+                                <div className="card-header">
+                                    <span className="project-category">{project.category}</span>
+                                    <span className="project-year">{project.year}</span>
+                                </div>
 
-                {/* CONDITIONAL RENDERING: Only render the link if project.link exists */}
-                {project.link && (
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-view-project">
-                      View Project <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                )}
-              </div>
-            ))
-          ) : (
-            <p className="no-projects">No projects found in this category.</p>
-          )}
-        </div>
-      </div>
-    </section>
+                                <h3 className="project-title">{project.title}</h3>
+                                
+                                <p className="project-description">{project.description}</p>
+                                
+                                <div className="tech-tags">
+                                    {project.tech.map((tag) => (
+                                        <span key={tag} className="tech-tag">{tag}</span>
+                                    ))}
+                                </div>
+
+                                {/* CONDITIONAL RENDERING: Only render the link if project.link exists */}
+                                {project.link && (
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-view-project">
+                                        View Code <ExternalLink size={16} className="ml-1"/>
+                                    </a>
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        <p className="no-projects">No projects found in this category.</p>
+                    )}
+                </div>
+            </div>
+        </section>
+    </main>
   );
 }
