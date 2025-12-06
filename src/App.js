@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Home as HomeIcon, User, FolderGit, Mail } from 'lucide-react';
+import { Home as HomeIcon, User, FolderGit, Mail, Zap } from 'lucide-react';
 
 // --- Import Global Styles ---
 import './App.css';
@@ -9,16 +9,17 @@ import Home from "./pages/Home";
 import About from "./pages/About"; 
 import Projects from "./pages/Projects"; 
 import Contact from "./pages/Contact"; 
+import Skills from "./pages/Skills"; // <-- NEW IMPORT
+import WelcomeOverlay from "./WelcomeOverlay"; 
 // ------------------------------------
 
-// IMPORT THE NEW WELCOME OVERLAY COMPONENT
-import WelcomeOverlay from "./WelcomeOverlay"; // <-- NEW IMPORT
 
 // --- 2. Navbar Component (State-based Navigation) ---
 const Navbar = ({ currentPage, setCurrentPage }) => {
   const navItems = [
     { label: "Home", page: "home", Icon: HomeIcon },
     { label: "About", page: "about", Icon: User },
+    { label: "Skills", page: "skills", Icon: Zap }, // <-- NEW NAV ITEM
     { label: "Projects", page: "projects", Icon: FolderGit },
     { label: "Contact", page: "contact", Icon: Mail },
   ];
@@ -72,6 +73,8 @@ export default function App() {
     switch (currentPage) {
      case "about":
         return <About setCurrentPage={setCurrentPage} />;
+     case "skills": // <-- NEW CASE FOR SKILLS
+        return <Skills />;
       case "projects":
         return <Projects />; 
       case "contact":

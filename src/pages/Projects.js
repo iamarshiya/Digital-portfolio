@@ -7,7 +7,7 @@ const allProjects = [
     id: 1,
     title: "Medicine Reminder System",
     category: "IoT/Embedded",
-    tech: ["STM32", "IoT-based logging", "ML-based pill verification"],
+    tech: ["STM32", "IoT-based logging", "ML-based pILL verification"],
     description: "Developed a secure and elderly-patient integrated system for medication logging with an IoT platform. Designed robust control logic, implemented cloud-hardware communication, and developed ML model for pill intake verification.",
     year: "Major Project",
   },

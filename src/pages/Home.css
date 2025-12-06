@@ -1,3 +1,5 @@
+/* src/pages/Home.css */
+
 /* --- Home Page Layout --- */
 .content-wrapper {
   display: flex;
@@ -7,6 +9,7 @@
   max-width: 1100px;
   z-index: 10;
   gap: 4rem;
+  padding: 0 2rem;
 }
 
 /* --- Left Side: Text and CTA --- */
@@ -17,6 +20,7 @@
   gap: 1rem;
 }
 
+/* Availability Tag (Subtle Glow) */
 .availability-tag {
   color: var(--primary-color);
   font-weight: 600;
@@ -29,12 +33,14 @@
   align-items: center;
   margin-bottom: 1.5rem;
   width: fit-content;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease; 
+  position: relative;
+  z-index: 1;
 }
 
 .availability-tag:hover {
     background-color: var(--nav-card-bg);
-    box-shadow: 0 0 5px rgba(210, 253, 187, 0.3);
+    box-shadow: 0 0 8px rgba(210, 253, 187, 0.4); 
 }
 
 .name {
@@ -76,7 +82,7 @@
   margin-top: 0;
 }
 
-/* --- Status Chips --- */
+/* --- Status Chips (Subtle Glow) --- */
 .location-info {
     display: flex;
     gap: 0.75rem;
@@ -99,7 +105,7 @@
 
 .info-chip:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 0 0 5px rgba(210, 253, 187, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 0 0 8px rgba(210, 253, 187, 0.4); 
 }
 
 .info-chip .lucide {
@@ -145,10 +151,10 @@
 .social-link:hover {
   transform: scale(1.1);
   color: var(--primary-color) !important; 
-  filter: drop-shadow(0 0 4px rgba(210, 253, 187, 0.8)); 
+  filter: drop-shadow(0 0 5px var(--primary-color)); 
 }
 
-/* --- Right Side: Image Card --- */
+/* --- Right Side: Image Card (Simplified) --- */
 .image-container {
   flex: 1;
   display: flex;
@@ -158,24 +164,69 @@
   z-index: 10;
 }
 
+/* NOTE: .image-card base styles come from App.css */
 .image-card {
-  width: 350px;
-  height: 440px;
-  /* Reuses .glow-border for the border styling */
-  background-color: var(--card-bg);
-  position: relative;
-  z-index: 1;
+    width: 300px;
+    height: 300px; 
 }
 
-/* Subtle float animation for the image card */
+/* Specific Animated Border (Using Conic Gradient) */
+.image-card::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    background: conic-gradient(
+        from 0deg, 
+        var(--primary-color) 0%, 
+        #00aaff 25%, 
+        #aa00ff 50%, 
+        var(--secondary-color) 75%, 
+        var(--primary-color) 100%
+    );
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0.6;
+    animation: rotateHue 15s linear infinite; 
+}
+
+.image-card::after {
+    content: '';
+    position: absolute;
+    top: 5px; bottom: 5px; left: 5px; right: 5px; 
+    background: var(--card-bg); 
+    border-radius: 50%;
+    z-index: 1; 
+}
+
+.image-card .profile-img {
+    width: calc(100% - 20px); 
+    height: calc(100% - 20px);
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2; 
+    transition: transform 0.4s ease;
+}
+
+.image-card:hover .profile-img {
+    transform: scale(1.05);
+}
+
+
+@keyframes rotateHue {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .subtle-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 5s ease-in-out infinite;
 }
 
 @keyframes float {
-    0% { transform: translateY(0px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); }
-    50% { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8); }
-    100% { transform: translateY(0px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); }
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(0deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
 }
 
 
@@ -215,8 +266,8 @@
      max-width: 300px;
    }
    
-   .btn {
-     width: 100%;
+   .cta-group .btn-primary, .cta-group .btn-secondary {
+       width: 100%;
    }
    
    .follow-me-text {
@@ -228,4 +279,22 @@
    .availability-tag {
      margin-bottom: 1rem;
    }
+
+   .image-card {
+       width: 280px;
+       height: 280px;
+   }
+}
+
+@media screen and (max-width: 480px) {
+    .name {
+        font-size: 2rem;
+    }
+    .role {
+        font-size: 1.2rem;
+    }
+    .image-card {
+        width: 220px;
+        height: 220px;
+    }
 }

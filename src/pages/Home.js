@@ -1,10 +1,11 @@
+// src/pages/Home.js
 import React, { useState, useEffect } from "react";
 import { Github, Linkedin, Download, Zap, MapPin, CheckCircle } from 'lucide-react';
 import "./Home.css";
 
 const socialLinks = [
-  { href: "#", label: "GitHub", Icon: Github },
-  { href: "#", label: "LinkedIn", Icon: Linkedin },
+  { href: "https://github.com/iamarshiya", label: "GitHub", Icon: Github },
+  { href: "https://linkedin.com/in/arshiyaattar", label: "LinkedIn", Icon: Linkedin },
 ];
 
 function Home({ setCurrentPage }) {
@@ -94,11 +95,9 @@ function Home({ setCurrentPage }) {
 
         {/* Right Side: Image Card with subtle float animation */}
         <div className="image-container fade-in-right">
-          <div className="image-card glow-border hue-animate subtle-float">
+          <div className="image-card crazy-image-card subtle-float"> {/* <-- NEW CLASS HERE */}
             <img
-              // REPLACED: Updated to a cool tech avatar image URL
-              src="http://googleusercontent.com/image_collection/image_retrieval/18137604020923391239_0
-" 
+              src="./profile.jpg" 
               alt="Arshiya Attar Tech Avatar"
               className="profile-img"
             />

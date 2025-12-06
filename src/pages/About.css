@@ -1,4 +1,6 @@
-/* --- CSS Variables from App.js for consistency --- */
+/* src/pages/About.css (Complete Code - Font Size & Layout Adjustments) */
+
+/* --- CSS Variables from App.css for consistency --- */
 :root {
   --primary-color: #D2FDBB; 
   --secondary-color: #B2E59E; 
@@ -13,8 +15,6 @@
 }
 
 /* --- Global Section Reset/Wrapper --- */
-/* The .main-section class is already defined in App.js styles, 
-   but we add the specific wrapper for padding and centering. */
 .about-wrapper {
   width: 100%;
   max-width: 1200px;
@@ -44,10 +44,10 @@
   gap: 1rem;
 }
 
-/* --- Typography and Neon Glow --- */
+/* --- Typography and Neon Glow (Adjusted Font Sizes) --- */
 .headline {
   font-family: var(--font-heading);
-  font-size: 3.5rem;
+  font-size: 2.8rem; /* REDUCED from 3.5rem */
   font-weight: 900;
   line-height: 1.2;
   color: var(--text-light);
@@ -58,11 +58,10 @@
   color: var(--primary-color);
 }
 
-/* Reduced Neon Glow for readability */
 .neon-glow {
-  text-shadow: 
-    0 0 1px var(--primary-color), 
-    0 0 2px var(--primary-color); 
+    text-shadow: 
+        0 0 1px var(--primary-color), 
+        0 0 3px rgba(210, 253, 187, 0.4); 
 }
 
 .description {
@@ -71,9 +70,10 @@
   max-width: 650px;
   margin-top: 1.5rem;
   margin-bottom: 2rem;
+  font-size: 1rem; /* Slightly reduced if it was larger */
 }
 
-/* --- Stats Grid --- */
+/* --- Stats Grid (Backlighting) --- */
 .stats-grid {
   display: flex;
   gap: 2rem;
@@ -86,18 +86,24 @@
   padding: 1.5rem;
   border-radius: 8px;
   min-width: 180px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 3px rgba(210, 253, 187, 0.1)); /* Initial subtle light */
+}
+
+.stat-box.clickable {
+    cursor: pointer;
 }
 
 .stat-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(210, 253, 187, 0.4);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4), 0 0 15px rgba(210, 253, 187, 0.3); 
+  filter: drop-shadow(0 0 5px rgba(210, 253, 187, 0.3)); 
 }
 
 .stat-number {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
   font-weight: 900;
+  font-size: 2.2rem; /* REDUCED from 2.5rem */
   color: var(--primary-color);
   display: flex;
   align-items: center;
@@ -114,15 +120,10 @@
 .stat-icon {
   color: var(--primary-color);
   margin-bottom: 0.2rem;
+  filter: drop-shadow(0 0 3px var(--primary-color));
 }
 
-/* --- Profile Image Card (Reusing Hero styles) --- */
-/* The .image-card, .glow-border, .hue-animate styles remain in App.js 
-   but we need the wrapper for alignment. */
-.profile-image-section .image-card {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-}
-
+/* --- Profile Image Card --- */
 .image-caption {
     color: var(--primary-color);
     font-size: 0.9rem;
@@ -136,26 +137,42 @@
 }
 
 .skills-content {
+  /* Changed to column layout to easily accommodate single, full-width skill block */
   display: flex;
+  flex-direction: column; 
   gap: 3rem;
 }
 
-/* --- Skill Blocks (Glassmorphism inspired) --- */
+/* New class for the single skill block to take full width */
+.full-width-block {
+    width: 100%;
+    max-width: 900px; /* Optional: limit for better readability on very wide screens */
+    margin: 0 auto; /* Center the block */
+}
+
+/* --- Skill Blocks (Glassmorphism & Backlighting) --- */
 .skill-block {
-  flex: 1;
-  background-color: rgba(17, 21, 26, 0.7); /* Semi-transparent background */
+  /* Now acts as a single block */
+  background-color: rgba(17, 21, 26, 0.7); 
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 5px rgba(210, 253, 187, 0.15)); 
+}
+
+.skill-block:hover {
+    filter: drop-shadow(0 0 10px rgba(210, 253, 187, 0.4));
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); 
 }
 
 .skill-block h2 {
   font-family: var(--font-heading);
+  font-size: 1.8rem; /* REDUCED from 1.5rem, adjusted for context */
   color: var(--primary-color);
-  font-size: 1.5rem;
   border-bottom: 2px solid rgba(210, 253, 187, 0.3);
   padding-bottom: 0.5rem;
   margin-top: 0;
@@ -163,11 +180,11 @@
 
 .skill-description {
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.95rem; /* Slightly adjusted */
     margin-bottom: 1.5rem;
 }
 
-/* --- Technical Skill Items (Progress Bars) --- */
+/* --- Technical Skill Items (Removed from JS, but keep styles if needed elsewhere) --- */
 .skill-item {
   display: flex;
   align-items: center;
@@ -210,7 +227,7 @@
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns for density */
+  grid-template-columns: 1fr 1fr; 
   gap: 1rem;
 }
 
@@ -226,6 +243,11 @@
     color: var(--primary-color);
 }
 
+/* Styling for the new CTA button section */
+.text-center-cta {
+    text-align: center;
+    margin-top: 2rem;
+}
 
 /* --- Responsive Adjustments --- */
 @media screen and (max-width: 1000px) {
@@ -239,7 +261,7 @@
         padding-top: 2rem;
     }
     .headline {
-        font-size: 2.5rem;
+        font-size: 2.2rem; /* Adjusted for smaller screens */
     }
     .stats-grid {
         justify-content: center;
@@ -250,30 +272,26 @@
         gap: 2rem;
     }
     .soft-skills-list {
-        grid-template-columns: 1fr; /* Single column on mobile */
+        grid-template-columns: 1fr; 
     }
     .profile-image-section {
         width: 100%;
         max-width: 350px;
     }
-    /* Add this to About.css */
-.stat-box.clickable {
-    cursor: pointer;
-}
-
-.stat-box.clickable:hover {
-    /* Enhance the visual feedback */
-    border-color: var(--primary-color);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(210, 253, 187, 0.6); 
-}
+    .full-width-block {
+        max-width: 100%; /* Allow it to take full width on smaller screens */
+    }
 }
 
 @media screen and (max-width: 600px) {
     .headline {
-        font-size: 2rem;
+        font-size: 1.8rem; /* Further adjustment for very small screens */
     }
     .stat-box {
         min-width: 140px;
         padding: 1rem;
+    }
+    .skill-block h2 {
+        font-size: 1.5rem;
     }
 }

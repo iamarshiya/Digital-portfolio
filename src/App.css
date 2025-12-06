@@ -1,125 +1,67 @@
-/* --- Fonts & Root Variables (Unified Theme) --- */
+/* src/App.css (Global & Navbar Styles - Bubble Restored) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700;900&display=swap');
 
 :root {
-  --primary-color: #D2FDBB; /* Mint Green Accent */
-  --secondary-color: #B2E59E; /* Darker Mint */
-  
-  --text-light: #f5f5f5; 
-  --text-muted: #a3aed0; 
-  --bg-dark: #0A0D11; /* Deep Dark Background */
-  --card-bg: #11151a; /* Dark Card Background */
-  --nav-card-bg: #1c2128; /* Slightly lighter card for contrast */
-  --border-color: #2d333b; /* Subtle border/line color */
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --primary-color: #D2FDBB; /* Mint green */
+  --secondary-color: #B2E59E; /* Darker mint */
+  --text-light: #f5f5f5;
+  --text-muted: #a3aed0;
+  --bg-dark: #0A0D11; /* Very dark background (main background) */
+  --card-bg: #11151a; /* Darker background for sections/cards */
+  --nav-card-bg: #1c2128; /* Slightly lighter for nav/frosted elements */
+  --border-color: #2d333b; /* Subtle border color */
+  --soft-glow: 0 0 15px rgba(210, 253, 187, 0.15); /* Soft, universal glow */
 }
 
+/* --- Base Styles --- */
 *, *::before, *::after {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
 
-body {
-  margin: 0;
-  font-family: var(--font-body);
-  background-color: var(--bg-dark);
-  color: var(--text-light); 
-  line-height: 1.6;
-  overflow-x: hidden;
-  min-height: 100vh;
-  transition: background-color 0.3s;
-  cursor: crosshair; 
-}
-
-/* --- GLOBAL UTILITIES & ANIMATIONS --- */
-
-.neon-glow {
-    text-shadow: 
-        0 0 1px var(--primary-color), 
-        0 0 2px var(--primary-color); 
-}
-
-.main-section {
-  min-height: 100vh; 
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8rem 2rem 4rem; /* Top padding for fixed nav */
-  overflow: hidden;
-}
-
-.bg-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+html, body, #root {
   height: 100%;
-  background: radial-gradient(circle at 10% 10%, rgba(210, 253, 187, 0.08), transparent 40%),
-              radial-gradient(circle at 90% 90%, rgba(16, 21, 26, 0.8), transparent 40%);
-  z-index: 0;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
-/* --- SHARED BUTTON STYLES --- */
-.btn {
-  padding: 12px 28px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-  white-space: nowrap;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  text-decoration: none; /* For link buttons */
-  display: inline-flex;
-  align-items: center;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  color: var(--card-bg); 
-  box-shadow: 0 6px 10px rgba(210, 253, 187, 0.4);
-}
-
-.btn-primary:hover {
-  background-color: var(--secondary-color);
-  transform: translateY(-2px); 
-  box-shadow: 0 8px 15px rgba(210, 253, 187, 0.6); 
-}
-
-.btn-primary:active {
-    transform: translateY(1px); 
-    box-shadow: 0 3px 6px rgba(210, 253, 187, 0.3); 
-}
-
-.btn-secondary {
-  background-color: transparent;
-  border-color: var(--border-color);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
   color: var(--text-light);
+  background-color: var(--bg-dark);
+  overflow-x: hidden; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.btn-secondary:hover {
-  background-color: var(--border-color);
-  transform: translateY(-2px);
+#root {
+  display: flex;
+  flex-direction: column;
 }
 
+/* --- Global Background & Main Container (Backlit Effect) --- */
+.main-app-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: 
+        radial-gradient(circle at center, rgba(30, 40, 50, 0.1) 0%, rgba(10, 13, 17, 1) 70%); 
+}
 
-/* --- NAV BAR STYLES --- */
+/* --- Navbar Fixes (Bubble Restored and Backlit) --- */
 .navbar-container-fixed {
-    position: fixed;
+    /* Use fixed positioning to keep the nav visible when scrolling */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100;
-    padding: 1.5rem 0 0;
+    z-index: 1000;
+    /* Background and Blur for the full header strip */
+    background: rgba(10, 13, 17, 0.7); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Subtle outer shadow */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
+    padding: 1rem 0; /* Add top/bottom padding to center the bubble */
 }
 
 .navbar-content-wrapper {
@@ -132,244 +74,194 @@ body {
 }
 
 .logo {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--text-light);
-  flex-shrink: 0;
-  margin-right: 2rem;
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-light);
+    line-height: 1;
+    text-shadow: 0 0 1px var(--primary-color);
 }
 
 .logo .dot {
-  color: var(--primary-color);
-}
-
-.navbar {
-  background-color: var(--nav-card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 50px;
-  padding: 0.5rem 0.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.frosted-nav {
-    background-color: rgba(28, 33, 40, 0.8); 
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-.border-glow {
-    box-shadow: 0 0 1px 1px var(--border-color), 0 0 10px rgba(210, 253, 187, 0.1);
+    color: var(--primary-color);
 }
 
 .nav-links {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem; /* Small gap between bubble links */
+    
+    /* --- BUBBLE CARD STYLING --- */
+    background-color: var(--nav-card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 0.5rem 0.5rem;
+    box-shadow: var(--soft-glow); /* Soft backlit glow on the bubble */
 }
 
 .nav-links li {
-  font-family: var(--font-body);
-  font-weight: 600;
-  color: var(--text-muted);
-  padding: 0.75rem 1.25rem;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-}
-
-.nav-links li:hover,
-.nav-links li:focus {
-  color: var(--text-light);
-  outline: none;
-}
-
-.nav-links li.active {
-  background-color: var(--primary-color);
-  color: var(--card-bg); 
-  box-shadow: 0 2px 8px rgba(210, 253, 187, 0.4); 
-}
-
-
-/* --- WELCOME OVERLAY STYLES (SHARED) --- */
-.welcome-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-dark);
-    z-index: 9999;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    position: relative;
+    padding: 0.75rem 1.25rem; /* Padding defines the clickable area */
+    border-radius: 50px;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out 3.5s; 
-    perspective: 1000px;
 }
 
-.welcome-overlay.hidden {
-    opacity: 0;
-    pointer-events: none; 
+/* Active state for Navbar item (clean background/text, minimal shadow) */
+.nav-links li.active {
+    background-color: var(--primary-color);
+    color: var(--card-bg); /* Dark text on mint background */
+    font-weight: 600;
+    box-shadow: 0 0 5px rgba(210, 253, 187, 0.5);
+    text-shadow: none;
 }
 
-.tech-animation-container {
-    text-align: center;
-    color: var(--primary-color);
-    font-family: var(--font-heading);
-    position: relative;
-    transform-style: preserve-3d;
+.nav-links li:hover {
+    color: var(--text-light);
 }
 
-.welcome-text-3d {
-    font-size: 8vw; 
-    font-weight: 900;
-    margin: 0;
-    line-height: 1;
-    transform: rotateX(20deg) translateZ(100px); 
-    animation: textRise 1s forwards cubic-bezier(0.2, 0.5, 0.1, 1);
-    text-shadow: 0 5px 10px rgba(0,0,0,0.5); 
+/* --- Shared Utilities (Refined Glow) --- */
+.neon-glow {
+    text-shadow: 
+        0 0 1px var(--primary-color), 
+        0 0 3px rgba(210, 253, 187, 0.4); 
+}
+.title-icon {
+    filter: drop-shadow(0 0 5px var(--primary-color));
 }
 
-@keyframes textRise {
-    0% { opacity: 0; transform: rotateX(70deg) translateZ(300px); }
-    100% { opacity: 1; transform: rotateX(20deg) translateZ(100px); }
-}
-
-.sub-text-3d {
-    font-family: var(--font-body);
-    font-size: 1.5vw;
-    color: var(--text-muted);
-    margin: 10px 0 30px;
-    letter-spacing: 5px;
-    opacity: 0;
-    animation: fadeIn 0.5s forwards 1s;
-}
-
-.data-stream-console {
-    color: var(--primary-color);
-    text-align: left;
-    font-family: monospace;
-    font-size: 1rem;
-    line-height: 1.3;
-    max-width: 400px;
-    margin: 20px auto;
-    white-space: pre-wrap;
-    border: 1px solid rgba(210, 253, 187, 0.2);
-    padding: 15px;
-    background-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0 15px rgba(210, 253, 187, 0.3);
-    opacity: 0;
-    animation: fadeIn 0.5s forwards 1.2s;
-}
-
-.scanline-bar {
-    width: 80%;
-    height: 2px;
-    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
-    box-shadow: 0 0 10px var(--primary-color);
-    margin-top: 20px;
-    opacity: 0;
-    animation: fadeIn 0.5s forwards 1.2s, scanBar 1.5s infinite alternate;
-}
-
-@keyframes scanBar {
-    0% { width: 50%; opacity: 0.5; }
-    100% { width: 90%; opacity: 1; }
-}
-
-/* --- SHARED IMAGE/CARD STYLES --- */
-.glow-border {
-    position: relative;
-    z-index: 1;
-    padding: 1px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 0 0 1px var(--border-color);
-    overflow: hidden;
-    border-radius: 16px;
-}
-
-.glow-border::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(transparent 0deg, var(--primary-color) 30deg, transparent 60deg, transparent 360deg);
-    z-index: -1;
-    animation: rotate 8s linear infinite;
-    opacity: 0.5;
-    transition: opacity 0.5s;
-}
-
-.glow-border.hue-animate::before {
-     animation: rotate 8s linear infinite, hue-shift 12s linear infinite;
-}
-
-.glow-border::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    background: var(--card-bg); 
-    border-radius: 14px;
-    z-index: 0;
-}
-
-.profile-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 14px; 
+.main-section {
+  min-height: 100vh; 
   position: relative;
-  z-index: 2; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Increased top padding to clear the fixed navbar */
+  padding: 8rem 2rem 4rem; 
+  overflow: hidden;
 }
 
-@keyframes rotate {
-    to { transform: rotate(360deg); }
+/* --- Buttons (Softer Glow) --- */
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--bg-dark); 
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(210, 253, 187, 0.3);
 }
 
-@keyframes hue-shift {
-    0% { filter: hue-rotate(0deg); }
-    100% { filter: hue-rotate(360deg); }
+.btn-primary:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(210, 253, 187, 0.5);
 }
 
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-light);
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
 
-/* --- SHARED RESPONSIVE STYLES --- */
-@media screen and (max-width: 900px) {
-    .welcome-text-3d {
-      font-size: 10vw;
-    }
-    .sub-text-3d {
-      font-size: 2.5vw;
-    }
+.btn-secondary:hover {
+    background-color: var(--border-color);
+}
+
+/* --- Image Card (Softened) --- */
+.image-card {
+    position: relative;
+    width: 300px;
+    height: 300px; 
+    border-radius: 50%;
+    background: var(--card-bg);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    filter: drop-shadow(0 0 10px rgba(210, 253, 187, 0.1));
+}
+
+.image-card::before {
+    content: '';
+    position: absolute;
+    top: -3px; left: -3px; right: -3px; bottom: -3px; 
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(5px);
+    opacity: 0.5;
+    animation: rotateHue 15s linear infinite;
+}
+
+.image-card .profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2; 
+    transition: transform 0.3s ease;
+}
+
+.image-card:hover .profile-img {
+    transform: scale(1.03);
+}
+
+@keyframes rotateHue {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Page Transition Effect (Simplified) --- */
+.page-transition {
+    width: 100%;
+    flex-grow: 1;
+    animation: pageFadeIn 0.5s ease-out forwards; 
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 900px) {
     .navbar-container-fixed {
-      position: relative;
-      padding: 2rem 0 0;
+        position: relative; /* Switch to relative on small screens */
+        background: var(--bg-dark); /* Remove blur on mobile */
+        backdrop-filter: none;
+        padding: 1rem 0;
     }
     .navbar-content-wrapper {
-      flex-direction: column;
-      align-items: center;
-      padding: 0 1.5rem;
+        flex-direction: column;
+        padding: 15px 20px;
     }
-    .main-section {
-      padding-top: 2rem;
+    .nav-links {
+        gap: 1rem;
+        margin-top: 10px;
     }
-    .frosted-nav {
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      background-color: var(--nav-card-bg);
-      margin-top: 1rem;
-      max-width: 90%;
+    .nav-links li {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
     }
     .logo {
-      margin-bottom: 1rem;
-      margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .main-section {
+        padding-top: 2rem; /* Reduce top padding on mobile since nav is not fixed */
     }
 }

@@ -1,0 +1,337 @@
+/* src/pages/Skills.css (Complete Code - Cybernetic Backlit UI) */
+
+/* --- CSS Variables from App.css for theme consistency --- */
+:root {
+  --primary-color: #D2FDBB; 
+  --secondary-color: #B2E59E; 
+  --text-light: #f5f5f5; 
+  --text-muted: #a3aed0; 
+  --bg-dark: #0A0D11; 
+  --card-bg: #11151a; 
+  --nav-card-bg: #1c2128; 
+  --border-color: #2d333b; 
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* --- Base Layout --- */
+.skills-page-section {
+    width: 100%;
+    padding: 2rem 2rem 6rem;
+    position: relative;
+    z-index: 10;
+}
+
+.skills-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.skills-title {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 3rem;
+    color: var(--text-light);
+    margin: 0 auto 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+.neon-glow {
+    text-shadow: 
+        0 0 1px var(--primary-color), 
+        0 0 3px rgba(210, 253, 187, 0.4); 
+}
+
+.skills-description {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: 0 auto 3rem;
+    max-width: 800px;
+}
+
+/* ------------------------------------------------------------------- */
+/* --- FEATURE 1: Hexagonal Filter Grid (ENHANCED) --- */
+/* ------------------------------------------------------------------- */
+.hex-grid-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+.hex-module {
+    cursor: pointer;
+    position: relative;
+    width: 130px; 
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.hex-module:hover {
+    transform: translateY(-8px) scale(1.05);
+    filter: drop-shadow(0 0 12px rgba(210, 253, 187, 0.4)); /* Softer hover glow */
+}
+
+.hex-shape {
+    position: absolute;
+    color: var(--nav-card-bg); 
+    stroke: var(--border-color); 
+    stroke-width: 2px;
+    width: 100%;
+    height: 100%;
+    transition: stroke 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.4));
+}
+
+/* Active Hexagon Pulse (Softened) */
+.hex-module.active .hex-shape {
+    stroke: var(--primary-color);
+    filter: drop-shadow(0 0 8px var(--primary-color));
+    animation: neonPulse 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes neonPulse {
+    0% { filter: drop-shadow(0 0 5px var(--primary-color)); stroke: var(--primary-color); }
+    100% { filter: drop-shadow(0 0 10px var(--primary-color)); stroke: var(--secondary-color); }
+}
+
+.hex-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5px;
+}
+
+.hex-icon {
+    font-size: 2rem;
+    margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.hex-content .lucide {
+    width: 30px;
+    height: 30px;
+    color: var(--text-muted);
+}
+
+.hex-module.active .hex-content .lucide {
+    color: var(--primary-color);
+    filter: drop-shadow(0 0 5px var(--primary-color));
+}
+
+.hex-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.hex-module.active .hex-label {
+    color: var(--primary-color);
+}
+
+
+/* ------------------------------------------------------------------- */
+/* --- FEATURE 2: Data Stream Visualization Block (CYBERNETIC UI) --- */
+/* ------------------------------------------------------------------- */
+.visualization-block {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    filter: drop-shadow(0 0 10px rgba(210, 253, 187, 0.1)); /* Initial soft backlighting */
+    position: relative;
+    z-index: 1;
+    overflow: hidden; 
+}
+
+.visualization-block:hover {
+    filter: drop-shadow(0 0 15px rgba(210, 253, 187, 0.3));
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6); 
+}
+
+/* Cybernetic Grid Background Overlay */
+.visualization-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to right, rgba(45, 51, 59, 0.2) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(45, 51, 59, 0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.block-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    position: relative; 
+    z-index: 2;
+}
+
+.block-header h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.block-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.block-header .lucide {
+    color: var(--primary-color);
+    width: 36px;
+    height: 36px;
+    filter: drop-shadow(0 0 5px var(--primary-color));
+}
+
+.skills-stream-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- Data Stream Progress (REVISED PROGRESS BAR) --- */
+.data-stream-skill-item {
+    padding: 1rem 0;
+    position: relative;
+    border-left: 2px solid var(--border-color);
+    padding-left: 1rem;
+    margin-left: 0.5rem;
+}
+
+.stream-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.skill-name-stream {
+    color: var(--text-light);
+}
+
+.skill-level-stream {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.stream-progress {
+    height: 12px;
+    background-color: var(--nav-card-bg);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    border: 1px solid var(--border-color);
+}
+
+/* Segmented, Pulsing Progress Fill */
+.stream-fill {
+    height: 100%;
+    transition: width 1.5s ease-out;
+    position: absolute;
+    left: 0;
+    top: 0;
+    
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            rgba(0,0,0,0.1),
+            rgba(0,0,0,0.1) 2px,
+            transparent 2px,
+            transparent 8px
+        );
+    background-size: 100px 100px;
+    animation: pulseGlow 1.5s infinite alternate ease-in-out; 
+}
+
+@keyframes pulseGlow {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
+}
+
+
+.diagnostic-summary {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.diagnostic-summary p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media screen and (max-width: 1000px) {
+    .skills-title {
+        font-size: 2.5rem;
+    }
+    .skills-stream-list {
+        grid-template-columns: 1fr; 
+        gap: 1rem;
+    }
+    .visualization-block {
+        padding: 2rem;
+    }
+    .hex-module {
+        width: 100px;
+        height: 100px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .skills-title {
+        font-size: 2rem;
+    }
+    .hex-module {
+        width: 80px;
+        height: 80px;
+    }
+    .block-header h3 {
+        font-size: 1.5rem;
+    }
+}

@@ -2,17 +2,9 @@ import React from "react";
 import "./About.css";
 import { Zap, CheckCircle } from 'lucide-react';
 
-// MODIFIED: Accept setCurrentPage as a prop
+// The technicalStack data is removed as it belongs on the Skills page.
 const About = ({ setCurrentPage }) => { 
-  const technicalStack = [
-    { name: "Python", icon: "🐍", level: "90%" }, 
-    { name: "ReactJS", icon: "⚛️", level: "85%" },
-    { name: "NodeJS", icon: "🟢", level: "70%" }, 
-    { name: "AIML", icon: "🧠", level: "75%" },
-    { name: "Embedded C", icon: "⚙️", level: "65%" },
-    { name: "Firebase & REST APIs", icon: "🔥", level: "80%" },
-  ];
-
+  
   const conceptualSkills = [
     "IoT Technologies",
     "Machine Learning",
@@ -30,7 +22,7 @@ const About = ({ setCurrentPage }) => {
       <div className="about-wrapper">
         <div className="about-container">
           
-          {/* Main Content Section */}
+          {/* Main Content Section (Hero / Biography) */}
           <section className="about-hero">
             <div className="text-section">
               
@@ -41,13 +33,12 @@ const About = ({ setCurrentPage }) => {
               </h1>
 
               <p className="description">
-                Detail-oriented and proactive B.Tech Electronics & Telecommunication student currently in the <strong>3rd year</strong> of study. My expertise lies at the critical intersection of <strong>hardware and software</strong>, with practical experience in <strong>React.js, Embedded C, CSS, and IoT-based systems</strong>. 
+                Detail-oriented and proactive B.Tech Electronics & Telecommunication student currently in the **3rd year** of study. My expertise lies at the critical intersection of **hardware and software**, with practical experience in **React.js, Embedded C, CSS, and IoT-based systems**. 
                 <br /><br />
-                I am deeply passionate about <strong>building real-time applications</strong> and evolving into a full-stack problem solver. My strong interest areas include <strong>AI/Machine Learning, edge computing, and connected healthcare</strong>.
+                I am deeply passionate about **building real-time applications** and evolving into a full-stack problem solver. My strong interest areas include **AI/Machine Learning, edge computing, and connected healthcare**.
               </p>
 
               <div className="stats-grid">
-                {/* MODIFIED: Added onClick handler and cursor pointer class (in CSS) */}
                 <div 
                   className="stat-box clickable"
                   onClick={() => setCurrentPage('projects')} // NAVIGATE TO PROJECTS
@@ -58,7 +49,6 @@ const About = ({ setCurrentPage }) => {
                   <div className="stat-label">Completed projects</div>
                 </div>
 
-                {/* Remaining stat box for consistency */}
                 <div className="stat-box">
                   <div className="stat-number">3<Zap size={24} className="stat-icon"/></div>
                   <div className="stat-label">Ongoing projects</div>
@@ -66,12 +56,11 @@ const About = ({ setCurrentPage }) => {
               </div>
             </div>
           
-            {/* Placeholder Image Card */}
+            {/* Image Card */}
             <div className="profile-image-section">
                 <div className="image-card glow-border hue-animate">
-                    {/* Placeholder image: Replace with your actual profile picture */}
                     <img 
-                        src="https://images.unsplash.com/photo-1549692520-cb971f1da8b9?q=80&w=1782&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                        src="./about.png" 
                         alt="Profile Illustration"
                         className="profile-img"
                     />
@@ -80,33 +69,10 @@ const About = ({ setCurrentPage }) => {
             </div>
           </section>
 
-          {/* Skills Section - Side-by-Side Cards on Desktop */}
+          {/* Conceptual Skills Section (Now the main focus of the lower half) */}
           <section className="skills-container">
-            <div className="skills-content">
-              
-              {/* Block 1: Technical Stack (Glassmorphic) */}
-              <div className="skill-block glass-card"> 
-                <h2>Technical Stack Proficiency</h2>
-                <p className="skill-description">
-                  Mastery of core development languages, frameworks, and deployment services necessary to build modern, scalable, full-stack applications and systems.
-                </p>
-
-                {/* Render all technical skills */}
-                {technicalStack.map((skill) => (
-                  <div className="skill-item" key={skill.name}>
-                    <span className="skill-icon" role="img" aria-label={skill.name}>{skill.icon}</span>
-                    <div className="skill-details">
-                      <div className="skill-name">{skill.name}</div>
-                      <div className="progress-bar">
-                        <div className="progress-fill" style={{width: skill.level}}></div> 
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                
-              </div>
-
-              <div className="skill-block glass-card">
+            <div className="skills-content">          
+                <div className="skill-block glass-card full-width-block"> {/* Added full-width class for flexibility */}
                 <h2>Conceptual & Soft Skills</h2>
                 
                 <p className="skill-description">
@@ -121,6 +87,17 @@ const About = ({ setCurrentPage }) => {
                     ))}
                 </ul>
               </div>
+              
+              {/* Optional: Add a button to direct users to the dedicated Skills page */}
+              <div className="text-center-cta">
+                  <button 
+                      className="btn btn-primary"
+                      onClick={() => setCurrentPage('skills')}
+                  >
+                      View Full Technical Stack →
+                  </button>
+              </div>
+
             </div>
           </section>
         </div>

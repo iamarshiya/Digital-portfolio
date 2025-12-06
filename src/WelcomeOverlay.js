@@ -1,7 +1,20 @@
-// src/components/WelcomeOverlay.js (UPDATED with Framer Motion)
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion"; // <-- NEW IMPORT
+import { motion } from "framer-motion";
+import { Zap, Code, Cpu, Smartphone, Database, Globe } from 'lucide-react'; 
+
 import "./WelcomeOverlay.css";
+
+const techParticles = [
+  { icon: "🐍", color: "#306998", size: "30px", name: "Python" },
+  { icon: <Code size={40}/>, color: "#61DAFB", size: "40px", name: "React" },
+  { icon: <Cpu size={35}/>, color: "#D2FDBB", size: "35px", name: "AIML" },
+  { icon: "🟢", color: "#68A063", size: "30px", name: "Node.js" },
+  { icon: <Database size={45}/>, color: "#FFCA28", size: "45px", name: "Firebase" },
+  { icon: "💻", color: "#FFFFFF", size: "30px", name: "Embedded C" },
+  { icon: <Globe size={30}/>, color: "#D2FDBB", size: "30px", name: "IoT" },
+  { icon: "🧠", color: "#00B0FF", size: "35px", name: "ML" },
+];
+
 
 const WelcomeOverlay = ({ onAnimationEnd }) => {
   const [show, setShow] = useState(true);
@@ -17,8 +30,9 @@ const WelcomeOverlay = ({ onAnimationEnd }) => {
     "// ACCESS GRANTED.",
   ];
   
+  const matrixLine = "// DATA MATRIX: 01001001 01101111 01110100 00101110 01000100 01100101 01110110";
 
-  // Typing effect (Logic remains the same)
+  // Typing effect 
   useEffect(() => {
     let index = 0;
     let charIndex = 0;
@@ -36,7 +50,10 @@ const WelcomeOverlay = ({ onAnimationEnd }) => {
           currentStream += "\n";
           setDataStream(currentStream);
           
-         
+          if (index === 2) { 
+              currentStream += matrixLine + "\n";
+              setDataStream(currentStream);
+          }
           
           index++;
           charIndex = 0;
@@ -67,24 +84,24 @@ const WelcomeOverlay = ({ onAnimationEnd }) => {
     };
   }, [onAnimationEnd]);
 
-  // Framer Motion Variants for the flying objects
+  // Framer Motion Variants for the flying objects (Logic remains the same)
   const flyingObjectVariants = {
     initial: (i) => ({ 
-      x: i % 2 === 0 ? '-100vw' : '100vw', // Start far left or right
-      y: (Math.random() - 0.5) * 500, // Random vertical start position
-      rotate: i * 30, // Initial rotation
+      x: i % 2 === 0 ? '-100vw' : '100vw', 
+      y: (Math.random() - 0.5) * 500, 
+      rotate: i * 30, 
       opacity: 0 
     }),
     animate: (i) => ({
-      x: i % 2 === 0 ? '-100px' : '100px', // End closer to center
-      y: (Math.random() - 0.5) * 50, // Final slight vertical shift
-      rotate: [i * 30, i * 30 + 360], // Spin and rotate
-      opacity: [0, 0.5, 0.5, 0], // Fade in, hold, and fade out
+      x: i % 2 === 0 ? '-200px' : '200px', 
+      y: (Math.random() - 0.5) * 100, 
+      rotate: [i * 30, i * 30 + 360 * (i % 3 + 1)], 
+      opacity: [0, 0.7, 0.7, 0], 
       transition: {
-        duration: 5,
+        duration: 4.5, 
         ease: "easeInOut",
-        delay: 0.5 + i * 0.3, // Staggered entry
-        times: [0, 0.3, 0.9, 1] // Keyframes for opacity
+        delay: 0.5 + i * 0.2, 
+        times: [0, 0.3, 0.9, 1] 
       }
     })
   };
@@ -93,24 +110,27 @@ const WelcomeOverlay = ({ onAnimationEnd }) => {
   return (
     <div className={`welcome-overlay ${show ? 'visible' : 'hidden'}`}>
         
-        {/* NEW: Framer Motion Animated Tech Objects */}
-        {Array.from({ length: 5 }).map((_, i) => (
+        {/* ANIMATED TECH ICONS */}
+        {techParticles.map((particle, i) => (
           <motion.div
             key={i}
-            className={`tech-particle particle-${i + 1}`}
+            className="tech-stack-icon"
             custom={i}
             variants={flyingObjectVariants}
             initial="initial"
             animate="animate"
+            // Dynamic inline styles for icon color and position
             style={{ 
-              width: `${20 + i * 5}px`, 
-              height: `${20 + i * 5}px`,
-              top: `${10 + i * 15}%`,
-              right: i % 2 === 0 ? '' : 'auto', 
-              left: i % 2 !== 0 ? '' : 'auto'
+              color: particle.color,
+              fontSize: particle.size,
+              zIndex: 5,
             }}
-          />
+          >
+            {particle.icon}
+          </motion.div>
         ))}
+    
+
 
         <div className="tech-animation-container">
             <h1 className="welcome-text-3d">
